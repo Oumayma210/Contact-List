@@ -4,17 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon server"
+    "back": "nodemon server",
+    "front": "cd client && npm start",
+    "dev": "concurrently \"npm run front\" \"npm run back\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "esm": "^3.2.25",
     "express": "^4.17.1",
     "mongoose": "^6.0.10"
   },
   "devDependencies": {
+    "concurrently": "^6.3.0",
     "dotenv": "^10.0.0",
     "nodemon": "^2.0.13"
   }
