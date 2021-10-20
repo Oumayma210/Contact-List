@@ -1,19 +1,15 @@
 import React from "react";
-import ContactList from "./../Component/ContactList";
-// import { Button } from "react-bootstrap";
-// import {Link} from "react-router-dom"
+import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import ContactList from "../Components/ContactList";
 const Home = () => {
-    return(
+    return (
         <div>
-            <h2>Contact List</h2>
-            {/* <Link to="/add"> */}
-                {/* <Button>
-                    ADD
-                </Button> */}
-            {/* </Link> */}
+            <Link to='/add'>
+            <Button>ADD</Button>
+            </Link>
             <ContactList/>
         </div>
-    )
+    );
 };
-
 export default Home;

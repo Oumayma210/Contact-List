@@ -25,15 +25,15 @@ router.post("/", async (req, res) => {
         const { name, email, phone } = req.body;
         //destru yfhmha mel schema mte3na eli Contact (: howa mnin chnjib newcontact)
         //handling errors:name and email required
-        if (!name || !email){
-            res.status(400).send({msg:'Name & email are required', error})
-            return
+        if (!name || !email) {
+            res.status(400).send({ msg: "Name & email are required", error });
+            return;
         }
         //handling errors : email is unique
-        const contact= await Contact.find({email})
+        const contact = await Contact.find({ email });
         if (contact) {
-            res.status(400).send({msg:'contact already exist!!!', error})
-            return
+            res.status(400).send({ msg: "contact already exist!!!", error });
+            return;
         }
         const newContact = new Contact({
             name,
@@ -46,22 +46,24 @@ router.post("/", async (req, res) => {
     } catch (error) {
         res.status(400).send({ msg: "ghalet ouma ghalet", error });
     }
-})
+});
 /**
  * @desc :  get all contacts
  * @path : http://localhost:5500/api/contacts/
  * @method : GET
  * @data : no data
  */
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
     try {
-        const listContacts =await Contact.find();
-        res.status(200).send({msg:'this the list of all contacts', listContacts})
+        const listContacts = await Contact.find();
+        res.status(200).send({
+            msg: "this the list of all contacts",
+            listContacts,
+        });
     } catch (error) {
-        res.status(400).send({msg:'failed', error})
-        
+        res.status(400).send({ msg: "failed", error });
     }
-})
+});
 
 /**
  * @desc :  get one
@@ -69,22 +71,21 @@ router.get('/', async (req, res) => {
  * @method : GET
  * @data : req.params.id
  */
-router.get('/:id', async (req, res)=>{
+router.get("/:id", async (req, res) => {
     try {
-        const contactToGet =await Contact.findOne({_id: req.params.id})
-        res.status(200).send({msg:'get one',contactToGet})
+        const contactToGet = await Contact.findOne({ _id: req.params.id });
+        res.status(200).send({ msg: "get one", contactToGet });
     } catch (error) {
-        res.status(400).send({msg:'failed', error})
-        
+        res.status(400).send({ msg: "failed", error });
     }
-})
+});
 /**
  * @desc :  delete contact
  * @path : http://localhost:5500/api/contacts/:id
  * @method : DELETE
  * @data : req.params.id
  */
- router.delete("/:_id", async (req, res) => {
+router.delete("/:_id", async (req, res) => {
     try {
         const { _id } = req.params;
         await Contact.findOneAndDelete({ _id });
@@ -102,15 +103,17 @@ router.get('/:id', async (req, res)=>{
  *@method: PUT
  *@data : req.params.id &req.body
  */
- router.put("/:_id", async (req, res)=> {
-    try{
-        const{_id}=req.params;
-        const result =await Contact.updateOne({_id}, {$set:{...req.body}})
-        res.status(200).send({msg:"contact edited"})
-    } catch(error){
-        res.status(400).send({msg:"can not edit this contact", error})
-
+router.put("/:_id", async (req, res) => {
+    try {
+        const { _id } = req.params;
+        const result = await Contact.updateOne(
+            { _id },
+            { $set: { ...req.body } }
+        );
+        res.status(200).send({ msg: "contact edited" });
+    } catch (error) {
+        res.status(400).send({ msg: "can not edit this contact", error });
     }
-})
+});
 
 module.exports = router;

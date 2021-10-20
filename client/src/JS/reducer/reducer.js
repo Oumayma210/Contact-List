@@ -1,13 +1,14 @@
 import {
     GET_CONTACTS,
-    LOAD_CONTACTS,
     FAIL_CONTACTS,
-} from "../actionsTypes/contact";
-//initial state
+    LOAD_CONTACTS,
+} from "./../actionsType/actionstype";
+
+//initialstate
 const initialState = {
     listContacts: [],
     error: null,
-    load: false, //
+    load: false,
 };
 //pure function
 const contactReducer = (state = initialState, { type, payload }) => {
@@ -20,9 +21,9 @@ const contactReducer = (state = initialState, { type, payload }) => {
                 load: false,
                 listContacts: payload.listContacts,
             };
+        //
         case FAIL_CONTACTS:
             return { ...state, load: false, error: payload };
-
         default:
             return state;
     }
